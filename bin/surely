@@ -4,4 +4,8 @@ $:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
 
 require 'surely'
 
-Surely::Daemon.new(ARGV, ENV)
+module Surely
+  def self.new(*args)
+    Daemon.new(ENV)
+  end
+end

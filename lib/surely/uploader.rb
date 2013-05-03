@@ -67,11 +67,11 @@ module Surely
     def callback
       @callback ||= lambda do |modified, added, removed|
         if added.any?
-          print 'Uploading... '
+          Raad::Logger.info 'Uploading... '
           refresh_token!
 
           if uploaded_file = upload_file(File.join(@directory, added.first))
-            puts "done! #{uploaded_file['link']}"
+            Raad::Logger.info "Done! Uploaded #{uploaded_file['link']}"
             system "say -v 'Fred' 'Uploaded'"
             system "echo #{uploaded_file['link']} | pbcopy"
           end

@@ -1,3 +1,4 @@
+require 'raad'
 require 'faraday'
 require 'listen'
 require 'multi_json'

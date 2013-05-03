@@ -17,10 +17,11 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  s.add_runtime_dependency "faraday"
-  s.add_runtime_dependency "listen"
-  s.add_runtime_dependency "multi_json"
-  s.add_runtime_dependency "yajl-ruby"
+  s.add_runtime_dependency "faraday", '~> 0.8'
+  s.add_runtime_dependency "listen", '~> 1.0'
+  s.add_runtime_dependency "multi_json", '~> 1.7'
+  s.add_runtime_dependency "yajl-ruby", '~> 1.1'
+  s.add_runtime_dependency "raad", '~> 0.5'
 
-  s.add_development_dependency "rake"
+  s.add_development_dependency "rake", '~> 10.0'
 end

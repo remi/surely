@@ -1,6 +1,6 @@
 # Surely
 
-Surely watches your screenshots directory and upload new files to your [imgur](http://imgur.com/) account.
+Surely is a daemon that watches your screenshots directory and upload new files to your [imgur](http://imgur.com/) account.
 
 ## Usage
 
@@ -13,6 +13,6 @@ $ gem install surely
 export IMGUR_CLIENT_ID=…
 export IMGUR_CLIENT_SECRET=…
 
-# Start the watcher (OS X screenshots directory by default)
-$ surely
+# Start the daemon (OS X screenshots directory by default)
+$ surely start -d
 ```
