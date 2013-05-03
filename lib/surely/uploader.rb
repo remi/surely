@@ -1,10 +1,10 @@
 module Surely
   class Uploader
     def initialize(env)
-      @access_token  = File.read("#{env['HOME']}/.surely_access_token") rescue nil
-      @refresh_token = File.read("#{env['HOME']}/.surely_refresh_token") rescue nil
+      @access_token  = File.read("#{env['HOME']}/.surely_access_token").chomp rescue nil
+      @refresh_token = File.read("#{env['HOME']}/.surely_refresh_token").chomp rescue nil
 
-      @imgur = Faraday.new(:url => 'https://api.imgur.com/3/') do |c|
+      @imgur = Faraday.new(url: 'https://api.imgur.com') do |c|
         c.request :multipart
         c.request :url_encoded
         c.adapter :net_http
@@ -16,7 +16,7 @@ module Surely
     def upload_file(file)
       file = Faraday::UploadIO.new(file, 'image/png')
 
-      response = @imgur.post 'image' do |r|
+      response = @imgur.post '/3/image' do |r|
         r.headers['Authorization'] = "Bearer #{@access_token}"
         r.body = { image: file }
       end
@@ -42,11 +42,11 @@ module Surely
       access_token = gets.chomp
       print "Enter your refresh_token: "
       refresh_token = gets.chomp
-      update_tokens({ "access_token" => access_token, "refresh_token" => refresh_token })
+      update_tokens("access_token" => access_token, "refresh_token" => refresh_token)
     end
 
     def refresh_token!
-      response = @imgur.post 'oauth2/token' do |r|
+      response = @imgur.post '/oauth2/token' do |r|
         r.body = {
           refresh_token: @refresh_token,
           client_id: @env['IMGUR_CLIENT_ID'],
@@ -61,6 +61,21 @@ module Surely
       end
 
       response
+    end
+
+    def callback
+      @callback ||= lambda do |modified, added, removed|
+        if added.any?
+          puts "Uploading..."
+          refresh_token!
+
+          if uploaded_file = upload_file(File.join(@env['DIRECTORY'], added.first))
+            puts "Done uploading #{uploaded_file['link']}"
+            system "say -v 'Fred' 'Uploaded'"
+            system "echo #{uploaded_file['link']} | pbcopy"
+          end
+        end
+      end
     end
   end
 end
