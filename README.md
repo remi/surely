@@ -1,6 +1,8 @@
 # Surely
 
-# Usage
+Surely watches your screenshots directory and upload new files to your imgur account.
+
+## Usage
 
 Get the gem:
 
