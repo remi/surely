@@ -4,7 +4,7 @@ Surely watches your screenshots directory and upload new files to your [imgur](h
 
 ## Usage
 
-```shell
+```bash
 # Install the gem
 $ gem install surely
 
