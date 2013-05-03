@@ -67,11 +67,11 @@ module Surely
     def callback
       @callback ||= lambda do |modified, added, removed|
         if added.any?
-          puts 'Uploading...'
+          print 'Uploading... '
           refresh_token!
 
           if uploaded_file = upload_file(File.join(@directory, added.first))
-            puts "Done uploading #{uploaded_file['link']}"
+            puts "done! #{uploaded_file['link']}"
             system "say -v 'Fred' 'Uploaded'"
             system "echo #{uploaded_file['link']} | pbcopy"
           end
