@@ -1,13 +1,14 @@
 module Surely
   class Daemon
     def initialize(argv, env)
-      @uploader = Uploader.new(env)
+      directory = env['SURELY_DIRECTORY'] || `defaults read com.apple.screencapture location`.chomp
+      @uploader = Uploader.new(env, directory)
       @uploader.authorize!
 
       begin
-        puts "Listening to changes on #{env['DIRECTORY']}..."
+        puts "Listening to changes on #{directory}..."
 
-        listener = Listen.to(env['DIRECTORY'])
+        listener = Listen.to(directory)
         listener.filter(/\.png$/)
         listener.change(&@uploader.callback)
         listener.start!

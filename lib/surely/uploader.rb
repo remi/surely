@@ -1,6 +1,6 @@
 module Surely
   class Uploader
-    def initialize(env)
+    def initialize(env, directory)
       @access_token  = File.read("#{env['HOME']}/.surely_access_token").chomp rescue nil
       @refresh_token = File.read("#{env['HOME']}/.surely_refresh_token").chomp rescue nil
 
@@ -11,6 +11,7 @@ module Surely
       end
 
       @env = env
+      @directory = directory
     end
 
     def upload_file(file)
@@ -69,7 +70,7 @@ module Surely
           puts 'Uploading...'
           refresh_token!
 
-          if uploaded_file = upload_file(File.join(@env['DIRECTORY'], added.first))
+          if uploaded_file = upload_file(File.join(@directory, added.first))
             puts "Done uploading #{uploaded_file['link']}"
             system "say -v 'Fred' 'Uploaded'"
             system "echo #{uploaded_file['link']} | pbcopy"

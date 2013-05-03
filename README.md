@@ -13,6 +13,6 @@ $ gem install surely
 export IMGUR_CLIENT_ID=…
 export IMGUR_CLIENT_SECRET=…
 
-# Start the watcher
-$ DIRECTORY=/path/to/screenshots surely
+# Start the watcher (OS X screenshots directory by default)
+$ surely
 ```
