@@ -12,14 +12,13 @@ $ gem install surely
 
 Configure it (these need to be command line options, but that’ll do for now)
 
-```
-export DIRECTORY=/path/to/screenshots
+```shell
 export IMGUR_CLIENT_ID=…
 export IMGUR_CLIENT_SECRET=…
 ```
 
 Start the daemon:
 
-```
-$ surely
+```shell
+$ DIRECTORY=/path/to/screenshots surely
 ```
