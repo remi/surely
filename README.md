@@ -8,10 +8,9 @@ Get the gem:
 
 ```shell
 $ gem install surely
-$ cd surely
 ```
 
-Configure it:
+Configure it (these need to be command line options, but that’ll do for now)
 
 ```
 export DIRECTORY=/path/to/screenshots
