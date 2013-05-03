@@ -21,3 +21,11 @@ $ surely start
 # After that, you can kill it (^C) and start it as a real daemon
 $ surely start -d
 ```
+
+## Taking a screenshot
+
+When you take a screenshot, Surely does three things:
+
+1. Upload it to your imgur account
+2. Copy the uploaded file URL into the clipboard
+3. Say *Uploaded!* out loud (using the `say` utility)
