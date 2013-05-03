@@ -22,15 +22,15 @@ module Surely
       end
 
       if response.success?
-        MultiJson.load(response.body)["data"]
+        MultiJson.load(response.body)['data']
       else
         nil
       end
     end
 
     def update_tokens(token_data)
-      @access_token = token_data["access_token"]
-      @refresh_token = token_data["refresh_token"]
+      @access_token = token_data['access_token']
+      @refresh_token = token_data['refresh_token']
       File.open("#{@env['HOME']}/.surely_access_token", 'w') { |f| f << @access_token }
       File.open("#{@env['HOME']}/.surely_refresh_token", 'w') { |f| f << @refresh_token }
     end
@@ -38,11 +38,11 @@ module Surely
     def authorize!
       return true if @access_token && @refresh_token
       system "open 'https://api.imgur.com/oauth2/authorize?client_id=#{@env['IMGUR_CLIENT_ID']}&response_type=token'"
-      print "Enter your access_token: "
+      print 'Enter your access_token: '
       access_token = gets.chomp
-      print "Enter your refresh_token: "
+      print 'Enter your refresh_token: '
       refresh_token = gets.chomp
-      update_tokens("access_token" => access_token, "refresh_token" => refresh_token)
+      update_tokens('access_token' => access_token, 'refresh_token' => refresh_token)
     end
 
     def refresh_token!
@@ -66,7 +66,7 @@ module Surely
     def callback
       @callback ||= lambda do |modified, added, removed|
         if added.any?
-          puts "Uploading..."
+          puts 'Uploading...'
           refresh_token!
 
           if uploaded_file = upload_file(File.join(@env['DIRECTORY'], added.first))
