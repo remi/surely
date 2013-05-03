@@ -15,7 +15,7 @@ module Surely
     end
 
     def upload_file(file)
-      file = Faraday::UploadIO.new(file, 'image/png')
+      file = Faraday::UploadIO.new(file, "image/#{file.split(/\./).last}")
 
       response = @imgur.post '/3/image' do |r|
         r.headers['Authorization'] = "Bearer #{@access_token}"

@@ -9,7 +9,7 @@ module Surely
         puts "Listening to changes on #{directory}..."
 
         listener = Listen.to(directory)
-        listener.filter(/\.png$/)
+        listener.filter(/\.(png|jpg|jpeg|gif)$/)
         listener.change(&@uploader.callback)
         listener.start!
       ensure
