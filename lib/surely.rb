@@ -1,3 +1,4 @@
+require 'yaml'
 require 'raad'
 require 'faraday'
 require 'listen'
