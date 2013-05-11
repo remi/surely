@@ -5,7 +5,10 @@ module Surely
     end
 
     def start
-      directory = @env['SURELY_DIRECTORY'] || `defaults read com.apple.screencapture location`.chomp
+      directory = @env['SURELY_DIRECTORY']
+      directory ||= `defaults read com.apple.screencapture location 2> /dev/null`.chomp
+      directory = "#{@env['HOME']}/Desktop" if directory.empty?
+
       @uploader = Uploader.new(@env, directory)
       @uploader.authorize!
 
