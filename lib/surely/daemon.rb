@@ -15,7 +15,7 @@ module Surely
       Raad::Logger.info "Listening to changes on #{directory}..."
 
       listener = Listen.to(directory)
-      listener.filter(/\.(png|jpg|jpeg|gif)$/)
+      listener.filter(/\.(png|jpg|jpeg|gif)$/i)
       listener.change(&@uploader.callback)
       listener.start
 
