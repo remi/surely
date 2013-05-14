@@ -9,3 +9,8 @@ module Surely
     Daemon.new(ENV)
   end
 end
+
+$RAAD_NOT_RUN = true
+
+argv = ARGV << ['--log', '/tmp/surely.log', '--pid', '/tmp/surely.pid']
+Raad::Runner.new(argv.flatten, Surely).run
