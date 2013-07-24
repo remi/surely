@@ -99,7 +99,7 @@ module Surely
           if uploaded_file = upload_file(File.join(@directory, added.first))
             Raad::Logger.info "Done! Uploaded #{uploaded_file['link']}"
             system "say -v 'Fred' 'Uploaded'"
-            system "echo -n \"#{uploaded_file['link']}\" | pbcopy"
+            IO.popen('pbcopy', 'w+') { |f| f << uploaded_file['link'].chomp }
           end
         end
       end
