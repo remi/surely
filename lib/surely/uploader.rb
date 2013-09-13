@@ -96,7 +96,7 @@ module Surely
           Raad::Logger.info 'Uploading... '
           refresh_token!
 
-          if uploaded_file = upload_file(File.join(@directory, added.first))
+          if uploaded_file = upload_file(added.first)
             Raad::Logger.info "Done! Uploaded #{uploaded_file['link']}"
             system "say -v 'Fred' 'Uploaded'"
             IO.popen('pbcopy', 'w+') { |f| f << uploaded_file['link'].chomp }
